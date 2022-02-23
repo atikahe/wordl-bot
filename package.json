@@ -1,0 +1,35 @@
+{
+  "name": "wordl-bot",
+  "version": "1.0.0",
+  "description": "Play Wordle with Friends",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atikahe/wordl-bot.git"
+  },
+  "keywords": [
+    "wordle",
+    "discord",
+    "game"
+  ],
+  "author": "Atikah",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atikahe/wordl-bot/issues"
+  },
+  "homepage": "https://github.com/atikahe/wordl-bot#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
