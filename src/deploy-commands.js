@@ -13,7 +13,7 @@ const rest = new REST({ version: '9' }).setToken(process.env.BOT_TOKEN)
 
 // Set global command
 rest.put(
-        Routes.applicationGuildCommands(process.env.CLIENT_ID),
+        Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
         { body: commands }
     )
     .then(() => console.log('Successfully registered commands'))
