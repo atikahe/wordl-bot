@@ -1,4 +1,4 @@
-module.export = Object.freeze({
+module.exports = Object.freeze({
     // Game modes
     NORMAL: 'normal',
     MANIC: 'manic',
