@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
+
 const { NORMAL, MANIC, LEGEND } = require('../utils/constants')
+const messages = require('../utils/messages')
 const day = require('../utils/day')
 
 require('dotenv').config()
@@ -23,25 +25,28 @@ module.exports = {
                 .addChoice(capitalizeFirst(LEGEND), LEGEND)
         ),
     async execute(interaction, session) {   
-        const mode = interaction.options.getString('mode')
-
-        if (!mode) {
-            return await interaction.reply(`Select mode first!\n[  ${NORMAL}  |  ${MANIC}  |  ${LEGEND}  ]`)
-        }
-
+        // Check if there is on going game
         const sessionID = `${interaction.guild.id}-${day()}`
         const sessionData = await session.get(sessionID)
+        
         const isGameOnGoing = sessionData ? sessionData.find(s => s.active) : false
-        console.log(isGameOnGoing)
+        
         if (isGameOnGoing) {
-            return await interaction.reply(`...finish what you started. Use /guess command followed by a five-lettered word :)\nHint: ${mode} mode.`)
+            return await interaction.reply(messages.GAME_ONGOING)
         }
+        
+        // Validate mode
+        const mode = interaction.options.getString('mode')
+        if (!mode) {
+            return await interaction.reply(messages.SELECT_MODE)
+        }
+        
 
-        data = sessionData 
+        const data = sessionData 
             ? sessionData.push({ mode, active: true, guess: [] })
             : [{ mode, active: true, guess: [] }]
         
         await session.set(sessionID, data)
-        await interaction.reply(`The game is afoot! Make your first guess. Session ID: ${sessionID} \n${tiles[mode]}`)
+        return await interaction.reply(messages.GAME_STARTED)
     }
 }
