@@ -1,10 +1,13 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
+
 const { BLACK, GREEN, WHITE, YELLOW } = require('../utils/constants')
 const day = require('../utils/day')
+const msg = require('../utils/messages')
 
 require('dotenv').config()
 
-const ANSWER = ['adieu', 'shown', 'cramp']
+// TODO: Generate random english words
+const ANSWER = ['adieu', 'shown', 'cramp', 'adieu', 'shown', 'cramp', 'adieu', 'shown', 'cramp']
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -20,30 +23,29 @@ module.exports = {
         const sessionData = await session.get(sessionID)
 
         if (!sessionData) {
-            await interaction.reply("Thou haven't started anything yet...")
-        }
+            return await interaction.reply(msg.GAME_NOT_STARTED)
+        }        
         
-        const gameData = sessionData.find(s => s.active)
-
-        const guesses = sessionData.guess
         const guess = interaction.options.getString('guess')
-        
+
+        // TODO: Check if word is english
+        if (guess.length !== 5) {
+            return await interaction.reply(msg.WORD_LENGTH_INVALID)
+        }
+
         const answer = ANSWER[day() - 1]
-        
-        let result = []
         const text = guess.split('')
+        let result = []
         text.forEach((char, i) => {
             if (answer.indexOf(char) === -1) result.push(BLACK)
             else if (answer[i] === char) result.push(GREEN)
             else result.push(YELLOW)
         })
-
-        // Find better way to operate with k-v
+        
+        const guesses = await session.get(sessionData.id)
         guesses.push(result)
-        gameData.guess = guesses
-        sessionData.push(gameData)
 
-        await session.set(sessionID, sessionData)
-        await interaction.reply('So you make a guess, big deal.')
+        await session.set(sessionData.id, guesses)
+        return await interaction.reply('So you make a guess, big deal.')
     }
 }
