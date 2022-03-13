@@ -28,10 +28,7 @@ module.exports = {
         // Check if there is on going game
         const sessionID = `${interaction.guild.id}-${day()}`
         const sessionData = await session.get(sessionID)
-        
-        const isGameOnGoing = sessionData ? sessionData.find(s => s.active) : false
-        
-        if (isGameOnGoing) {
+        if (sessionData?.active) {
             return await interaction.reply(messages.GAME_ONGOING)
         }
         
@@ -41,12 +38,15 @@ module.exports = {
             return await interaction.reply(messages.SELECT_MODE)
         }
         
-
-        const data = sessionData 
-            ? sessionData.push({ mode, active: true, guess: [] })
-            : [{ mode, active: true, guess: [] }]
+        // Check if user had done the same mode
+        const guessesID = `${interaction.guild.id}-${mode}-${day()}`
+        const guessesData = await session.get(guessesID)
+        if (guessesData) {
+            return await interaction.reply(messages.GAME_DONE)
+        }
         
-        await session.set(sessionID, data)
+        await session.set(sessionID, { active: true, id: guessesID })
+        await session.set(guessesID, [])
         return await interaction.reply(messages.GAME_STARTED)
     }
 }

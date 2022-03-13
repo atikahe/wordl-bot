@@ -32,7 +32,7 @@ describe('Start', () => {
         const activeSession = await session.get(`${interaction.guild.id}-${day()}`)
         
         expect(res).toBe(messages.GAME_STARTED)
-        expect(activeSession).toBeInstanceOf(Array)
+        expect(activeSession).toBeDefined()
     }),
     test('Fail when on going game exist', async () => {
         const interaction = {
@@ -50,7 +50,7 @@ describe('Start', () => {
         const session = new Keyv()
         await session.set(
             `${interaction.guild.id}-${day()}`,
-            [{ mode: 'normal', active: true, guess: [] }]
+            { active: true, id: `${interaction.guild.id}-normal-${day()}` }
         )
 
         const res = await start.execute(interaction, session)
