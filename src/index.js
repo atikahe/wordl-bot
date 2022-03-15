@@ -2,10 +2,13 @@ const fs = require('node:fs')
 const Keyv = require('keyv')
 const { Client, Intents, Collection } = require('discord.js')
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
-const session = new Keyv()
-
 require('dotenv').config()
+
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
+const { REDIS_USER, REDIS_PASS, REDIS_HOST, REDIS_PORT } = process.env
+const session = new Keyv(
+    `redis://${REDIS_USER}:${REDIS_PASS}@${REDIS_HOST}:${REDIS_PORT}`
+)
 
 // Handle keyv error
 session.on('error', err => console.error('Keyv connection error:', err))
