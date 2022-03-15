@@ -1,5 +1,3 @@
-const { BLACK } = require('./constants')
-
 const squares = {
     'black': '⬛',
     'white': '⬜',
@@ -9,7 +7,7 @@ const squares = {
 
 module.exports = (row, colors = false) => {
     if (!colors) {
-        colors = new Array(5).fill(BLACK)
+        colors = new Array(5).fill('black')
     }
 
     let tiles = ''

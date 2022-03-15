@@ -1,8 +1,8 @@
 module.exports = Object.freeze({
     // Game modes
-    NORMAL: 'normal',
-    MANIC: 'manic',
-    LEGEND: 'legend',
+    NORMAL: 'wordle',
+    MANIC: 'dordle',
+    LEGEND: 'quordle',
 
     // Emoji colors
     GREEN: 'green',
