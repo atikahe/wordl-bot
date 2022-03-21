@@ -1,8 +1,9 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
 
-const { BLACK, GREEN, WHITE, YELLOW } = require('../utils/constants')
+const { GREEN, WHITE, YELLOW } = require('../utils/constants')
 const day = require('../utils/day')
 const msg = require('../utils/messages')
+const tileBuilder = require('../utils/tileBuilder')
 
 require('dotenv').config()
 
@@ -18,7 +19,7 @@ module.exports = {
                 .setDescription('Enter your finest guess.')
                 .setRequired(true)
         ),
-    async execute(interaction, session) {        
+    async execute(interaction, session, static) {        
         const sessionID = `${interaction.guild.id}-${day()}`
         const sessionData = await session.get(sessionID)
 
@@ -37,7 +38,7 @@ module.exports = {
         const text = guess.split('')
         let result = []
         text.forEach((char, i) => {
-            if (answer.indexOf(char) === -1) result.push(BLACK)
+            if (answer.indexOf(char) === -1) result.push(WHITE)
             else if (answer[i] === char) result.push(GREEN)
             else result.push(YELLOW)
         })
@@ -46,6 +47,12 @@ module.exports = {
         guesses.push(result)
 
         await session.set(sessionData.id, guesses)
-        return await interaction.reply('So you make a guess, big deal.')
+
+        let reply = ''
+        guesses.forEach(block => {
+            reply += `${tileBuilder(1, block)}\n`
+        })
+
+        return await interaction.reply(`So you make a guess, big deal. \n${reply}`)
     }
 }
