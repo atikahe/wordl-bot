@@ -24,7 +24,7 @@ module.exports = {
                 .addChoice(capitalizeFirst(MANIC), MANIC)
                 .addChoice(capitalizeFirst(LEGEND), LEGEND)
         ),
-    async execute(interaction, session) {   
+    async execute(interaction, session, static) {
         // Check if there is on going game
         const sessionID = `${interaction.guild.id}-${day()}`
         const sessionData = await session.get(sessionID)
@@ -45,7 +45,7 @@ module.exports = {
             return await interaction.reply(messages.GAME_DONE)
         }
         
-        await session.set(sessionID, { active: true, id: guessesID })
+        await session.set(sessionID, { active: true, id: guessesID, mode })
         await session.set(guessesID, [])
         return await interaction.reply(messages.GAME_STARTED)
     }
