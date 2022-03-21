@@ -1,0 +1,17 @@
+[
+    {
+        "mode": "wordle",
+        "maxTries": 6,
+        "answer": ["arr1"]
+    },
+    {
+        "mode": "dordle",
+        "maxTries": 7,
+        "answer": ["arr2", "arr3"]
+    },
+    {
+        "mode": "quordle",
+        "maxTries": 9,
+        "answer": ["arr4", "arr5", "arr6", "arr7"]
+    }
+]
