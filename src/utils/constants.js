@@ -8,5 +8,10 @@ module.exports = Object.freeze({
     GREEN: 'green',
     YELLOW: 'yellow',
     BLACK: 'black',
-    WHITE: 'white'
+    WHITE: 'white',
+
+    // Game status
+    WIN: 'win',
+    LOSE: 'lose',
+    ONGOING: 'ongoing'
 })
