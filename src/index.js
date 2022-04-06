@@ -7,12 +7,13 @@ require('dotenv').config()
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
 
+
 // Setup mongodb storage
 const { MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_DB } = process.env
-const static = new KeyvM(
+const staticData = new KeyvM(
     `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}/${MONGO_DB}?retryWrites=true&w=majority`
 )
-static.on('error', err => console.error(`Mongo connection error: ${err}`))
+staticData.on('error', err => console.error(`There's a snake in my boots! MongoError: ${err}`))
 
 
 // Setup redis storage
@@ -20,7 +21,8 @@ const { REDIS_USER, REDIS_PASS, REDIS_HOST, REDIS_PORT } = process.env
 const session = new Keyv(
     `redis://${REDIS_USER}:${REDIS_PASS}@${REDIS_HOST}:${REDIS_PORT}`
 )
-session.on('error', err => console.error('Redis connection error:', err))
+session.on('error', err => console.error(`There's a snake in my boots! RedisError ${err}`))
+
 
 // Setup commands
 client.commands = new Collection()
@@ -32,10 +34,12 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command)
 }
 
+
 // Establish client connection
-client.once('ready', () => {
+client.once('ready', async () => {
     console.log(`Beep beep I'm ready! Logged in as ${client.user.tag}`)
 })
+
 
 client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return
@@ -45,7 +49,7 @@ client.on('interactionCreate', async interaction => {
     if (!command) return
 
     try {
-        await command.execute(interaction, session, static)
+        await command.execute({interaction, session, staticData})
     } catch (error) {
         console.error(error)
         await interaction.reply({
