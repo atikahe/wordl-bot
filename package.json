@@ -4,7 +4,8 @@
   "description": "Play Wordle with Friends",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --collectCoverage --detectOpenHandles --logHeapUsage --verbose",
+    "test:live": "jest --watch --logHeapUsage --verbose",
     "dev": "nodemon src/index.js",
     "start": "node src/index.js"
   },
