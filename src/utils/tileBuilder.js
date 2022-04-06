@@ -5,7 +5,7 @@ const squares = {
     'yellow': '🟨'
 }
 
-module.exports = (row, colors = false) => {
+module.exports = (row, colors = []) => {
     if (!colors) {
         colors = new Array(5).fill('black')
     }
