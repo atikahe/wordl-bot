@@ -20,7 +20,7 @@ The game will start as ```wordle``` mode by default, the good old-fashioned, one
 
 ## How to test
 - Use ```npm run test:live``` command to run ```jest --watchAll``` in the background
-- Use ```npm run test```command to the test one time and generate coverage report
+- Use ```npm run test```command to run the test one time and generate coverage report
 
 ## Resources
 - [Discord.js](https://discord.js.org/#/)
