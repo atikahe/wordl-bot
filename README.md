@@ -3,7 +3,7 @@
 Play wordle on your discord server! Inspired Josh Wardle's puzzle game and other variations of it found on the internet.
 
 ## How to use bot
-Invite this bot to your server. Link will go here.
+Invite this bot to your server. Link will go here when bot went live.
 
 Use ```/``` as prefix with these commands:
 - ```start``` to start a session
