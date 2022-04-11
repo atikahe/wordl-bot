@@ -8,7 +8,10 @@
     "test:live": "jest --watch --logHeapUsage --verbose",
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint --cache --fix",
+    "prettier": "prettier --write \"src/**/*.js\"",
+    "prettier:check": "prettier --check \"src/**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -41,9 +44,11 @@
     "eslint-config-google": "^0.14.0",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
-    "lint-staged": "^12.3.7"
+    "lint-staged": "^12.3.7",
+    "prettier": "^2.6.2"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix"
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   }
 }
