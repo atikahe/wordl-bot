@@ -12,7 +12,7 @@ module.exports = {
     'max-len': [
       'warn',
       {
-        code: 100,
+        code: 105,
       },
     ],
   },
