@@ -7,7 +7,8 @@
     "test": "jest --collectCoverage --detectOpenHandles --logHeapUsage --verbose",
     "test:live": "jest --watch --logHeapUsage --verbose",
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,11 @@
   "devDependencies": {
     "eslint": "^8.9.0",
     "eslint-config-google": "^0.14.0",
-    "jest": "^27.5.1"
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "lint-staged": "^12.3.7"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
   }
 }
