@@ -54,6 +54,8 @@ module.exports = {
       status: ONGOING,
     });
     await session.set(guessesID, []);
-    return await interaction.reply(messages.GAME_STARTED);
+    return await interaction.reply(
+        `${messages.GAME_STARTED} Mode: ${mode}.`,
+    );
   },
 };
