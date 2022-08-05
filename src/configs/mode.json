@@ -3,18 +3,18 @@
         "mode": "wordle",
         "maxTries": 6,
         "wordArr": ["listA"],
-        "start": 1649174817.378
+        "start": 1659712452.378
     },
     {
         "mode": "dordle",
         "maxTries": 7,
         "wordArr": ["listB", "listC"],
-        "start": 1649174817.378
+        "start": 1659712452.378
     },
     {
         "mode": "quordle",
         "maxTries": 9,
         "wordArr": ["listD", "listE", "listF", "listG"],
-        "start": 1649174817.378
+        "start": 1659712452.378
     }
 ]
