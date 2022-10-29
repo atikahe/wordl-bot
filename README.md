@@ -1,4 +1,6 @@
 # Wordl Bot
+![Github CI](https://github.com/atikahe/wordl-bot/actions/workflows/tests.yml/badge.svg)
+ [![HitCount](https://hits.dwyl.com/atikahe/wordl-bot.svg?style=flat)](http://hits.dwyl.com/atikahe/wordl-bot)
 
 Play wordle on your discord server! Inspired Josh Wardle's puzzle game and other variations of it found on the internet.
 
