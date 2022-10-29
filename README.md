@@ -3,7 +3,7 @@
 Play wordle on your discord server! Inspired Josh Wardle's puzzle game and other variations of it found on the internet.
 
 ## How to use bot
-Invite this bot to your server. Link goes [here](https://dsc.gg/wordl)
+Invite this bot! Link goes [here](https://dsc.gg/wordl).
 
 Use ```/``` as prefix with these commands:
 - ```start``` to start a session
@@ -37,3 +37,4 @@ The game will start as ```wordle``` mode by default, the good old-fashioned, one
 - [Keyv](https://www.npmjs.com/package/keyv)
 - [Nodemon](https://www.npmjs.com/package/nodemon)
 - [Redis](https://redis.io)
+- [TravisCI](https://www.travis-ci.com/)
