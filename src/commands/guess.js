@@ -20,6 +20,7 @@ module.exports = {
             .setRequired(true),
       ),
   async execute({interaction, session, staticData}) {
+    console.log('run guess');
     // Get session data
     const date = new Date().toISOString().split('T')[0];
     const sessionID = `${interaction.guild.id}:${date}`;
