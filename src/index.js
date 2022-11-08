@@ -12,18 +12,20 @@ const {MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_DB} = process.env;
 const staticData = new KeyvM(
     `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}/${MONGO_DB}?retryWrites=true&w=majority`,
 );
-staticData.on('error', (err) =>
-  console.error(`There's a snake in my boots! MongoError: ${err}`),
-);
+staticData.on('error', (err) => {
+  console.error(`There's a snake in my boots! MongoError: ${err}`);
+  process.exit(1);
+});
 
 // Setup redis storage
 const {REDIS_USER, REDIS_PASS, REDIS_HOST, REDIS_PORT} = process.env;
 const session = new Keyv(
     `redis://${REDIS_USER}:${REDIS_PASS}@${REDIS_HOST}:${REDIS_PORT}`,
 );
-session.on('error', (err) =>
-  console.error(`There's a snake in my boots! RedisError ${err}`),
-);
+session.on('error', (err) => {
+  console.error(`There's a snake in my boots! RedisError ${err}`);
+  process.exit(1);
+});
 
 // Setup commands
 client.commands = new Collection();
