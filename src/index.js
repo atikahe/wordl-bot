@@ -7,7 +7,6 @@ require('dotenv').config();
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds],
-  // Never let bot messages ping anyone, even if they echo user input.
   allowedMentions: {parse: []},
 });
 

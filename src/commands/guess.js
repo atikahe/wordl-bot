@@ -30,10 +30,8 @@ module.exports = {
       return await interaction.reply(msg.GAME_NOT_STARTED);
     }
 
-    // TODO: Check if word is english
     const guess = interaction.options.getString('guess');
-    if (!/^[a-z]{5}$/i.test(guess)) {
-      // Don't echo the raw input back: it may contain mentions or markdown.
+    if (!/^[a-zA-Z]{5}$/i.test(guess)) {
       return await interaction.reply(msg.WORD_LENGTH_INVALID);
     }
 
