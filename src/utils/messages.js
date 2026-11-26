@@ -6,7 +6,7 @@ module.exports = Object.freeze({
   SELECT_MODE: `Select mode first!\n[  ${c.NORMAL}  |  ${c.MANIC}  |  ${c.LEGEND}  ]`,
   GAME_DONE: 'Easy there.. You did this today. Try again tomorrow.',
   GAME_NOT_STARTED: 'Thou haven\'t started anything yet.',
-  WORD_LENGTH_INVALID: 'Five characters only!',
+  WORD_LENGTH_INVALID: 'Five letters (A–Z) only!',
   WORD_INVALID: 'That\'s... not english.',
   COMING_SOON: 'Feature is on the way 😉',
   OUT_OF_MOVE: 'Out of move!',

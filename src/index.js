@@ -5,7 +5,11 @@ const {Client, Intents, Collection} = require('discord.js');
 
 require('dotenv').config();
 
-const client = new Client({intents: [Intents.FLAGS.GUILDS]});
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS],
+  // Never let bot messages ping anyone, even if they echo user input.
+  allowedMentions: {parse: []},
+});
 
 // Setup mongodb storage
 const {MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_DB} = process.env;

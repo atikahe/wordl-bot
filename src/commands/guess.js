@@ -30,6 +30,13 @@ module.exports = {
       return await interaction.reply(msg.GAME_NOT_STARTED);
     }
 
+    // TODO: Check if word is english
+    const guess = interaction.options.getString('guess');
+    if (!/^[a-z]{5}$/i.test(guess)) {
+      // Don't echo the raw input back: it may contain mentions or markdown.
+      return await interaction.reply(msg.WORD_LENGTH_INVALID);
+    }
+
     // Setup mode config
     const {mode, guessesID} = sessionData;
     const {start, wordArr, maxTries} = ModeConfigs.find(
@@ -48,14 +55,6 @@ module.exports = {
     const guesses = await session.get(guessesID);
     if (guesses.length >= maxTries) {
       return await interaction.reply('Out of move!');
-    }
-
-    // TODO: Check if word is english
-    const guess = interaction.options.getString('guess');
-    if (guess.length !== 5) {
-      return await interaction.reply(
-          `${guess} | ${msg.WORD_LENGTH_INVALID}`,
-      );
     }
 
     // TODO: Put into separate function

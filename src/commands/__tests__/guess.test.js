@@ -168,6 +168,42 @@ describe('Guess', () => {
     );
   });
 
+  test.each(['@everyone', 'abc12', 'cr mp', '<@&1>'])(
+      'Reject non-letter guess %p without echoing it',
+      async (input) => {
+        interaction.options.guess = input;
+        await session.set(sessionID, {
+          active: true,
+          guessesID,
+          mode,
+          status: LOSE,
+        });
+        await session.set(guessesID, []);
+
+        const res = await guess.execute({interaction, session, staticData});
+
+        expect(res).toEqual(messages.WORD_LENGTH_INVALID);
+        expect(res).not.toContain(input);
+        expect(await session.get(guessesID)).toEqual([]);
+      },
+  );
+
+  test('Accept uppercase guess', async () => {
+    interaction.options.guess = 'CRAMP';
+    await session.set(sessionID, {
+      active: true,
+      guessesID,
+      mode,
+      status: LOSE,
+    });
+    await session.set(guessesID, []);
+
+    const res = await guess.execute({interaction, session, staticData});
+
+    expect(res).not.toEqual(messages.WORD_LENGTH_INVALID);
+    expect(await session.get(guessesID)).toHaveLength(1);
+  });
+
   test('Set status to lose after maxTries', async () => {
     interaction.options.guess = 'weary';
     await session.set(sessionID, {
