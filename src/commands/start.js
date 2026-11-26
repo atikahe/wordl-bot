@@ -1,4 +1,4 @@
-const {SlashCommandBuilder} = require('@discordjs/builders');
+const {SlashCommandBuilder} = require('discord.js');
 
 const {NORMAL, MANIC, LEGEND, ONGOING} = require('../utils/constants');
 const messages = require('../utils/messages');
@@ -15,9 +15,12 @@ module.exports = {
         option
             .setName('mode')
             .setDescription('Modes of the game.')
-            .addChoice(capitalizeFirst(NORMAL), NORMAL)
-            .addChoice(capitalizeFirst(MANIC), MANIC)
-            .addChoice(capitalizeFirst(LEGEND), LEGEND),
+            .addChoices(
+                ...[NORMAL, MANIC, LEGEND].map((mode) => ({
+                  name: capitalizeFirst(mode),
+                  value: mode,
+                })),
+            ),
       ),
   async execute({interaction, session}) {
     // Check if there is on going game

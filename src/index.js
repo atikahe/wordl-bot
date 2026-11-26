@@ -1,12 +1,12 @@
 const fs = require('node:fs');
 const Keyv = require('keyv');
 const KeyvM = require('@keyv/mongo');
-const {Client, Intents, Collection} = require('discord.js');
+const {Client, Collection, GatewayIntentBits, MessageFlags} = require('discord.js');
 
 require('dotenv').config();
 
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS],
+  intents: [GatewayIntentBits.Guilds],
   // Never let bot messages ping anyone, even if they echo user input.
   allowedMentions: {parse: []},
 });
@@ -53,7 +53,7 @@ client.once('ready', async () => {
 });
 
 client.on('interactionCreate', async (interaction) => {
-  if (!interaction.isCommand()) return;
+  if (!interaction.isChatInputCommand()) return;
 
   const command = client.commands.get(interaction.commandName);
 
@@ -65,7 +65,7 @@ client.on('interactionCreate', async (interaction) => {
     console.error(error);
     await interaction.reply({
       content: `There was an error while executing ${interaction.commandName}`,
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     });
   }
 });

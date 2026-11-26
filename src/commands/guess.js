@@ -1,4 +1,4 @@
-const {SlashCommandBuilder} = require('@discordjs/builders');
+const {SlashCommandBuilder} = require('discord.js');
 
 const {GREEN, WHITE, YELLOW, WIN, LOSE} = require('../utils/constants');
 const day = require('../utils/day');
