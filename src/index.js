@@ -13,8 +13,9 @@ const client = new Client({
 
 // Setup mongodb storage
 const {MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_DB} = process.env;
+const mongoAuth = `${encodeURIComponent(MONGO_USER)}:${encodeURIComponent(MONGO_PASS)}`;
 const staticData = new KeyvM(
-    `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}/${MONGO_DB}?retryWrites=true&w=majority`,
+    `mongodb+srv://${mongoAuth}@${MONGO_HOST}/${MONGO_DB}?retryWrites=true&w=majority`,
 );
 staticData.on('error', (err) => {
   console.error(`There's a snake in my boots! MongoError: ${err}`);
@@ -22,9 +23,12 @@ staticData.on('error', (err) => {
 });
 
 // Setup redis storage
-const {REDIS_USER, REDIS_PASS, REDIS_HOST, REDIS_PORT} = process.env;
+// TLS (rediss://) unless REDIS_TLS=false, e.g. for a local Redis.
+const {REDIS_USER, REDIS_PASS, REDIS_HOST, REDIS_PORT, REDIS_TLS} = process.env;
+const redisScheme = REDIS_TLS === 'false' ? 'redis' : 'rediss';
+const redisAuth = `${encodeURIComponent(REDIS_USER)}:${encodeURIComponent(REDIS_PASS)}`;
 const session = new Keyv(
-    `redis://${REDIS_USER}:${REDIS_PASS}@${REDIS_HOST}:${REDIS_PORT}`,
+    `${redisScheme}://${redisAuth}@${REDIS_HOST}:${REDIS_PORT}`,
 );
 session.on('error', (err) => {
   console.error(`There's a snake in my boots! RedisError ${err}`);

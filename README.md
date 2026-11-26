@@ -21,7 +21,8 @@ The game will start as `wordle` mode by default, the good old-fashioned, one fiv
 ## How to setup
 
 -   Git clone this repository
--   Setup token, client id, and guild id variable in env
+-   Copy `.env.example` to `.env` and fill in the Discord token, client id, Redis and MongoDB credentials
+-   Redis connects over TLS (`rediss://`) by default; set `REDIS_TLS=false` for a local, non-TLS Redis
 -   `npm install`
 -   `node src/deploy-commands.js`
 -   And you're ready to go
